@@ -30,10 +30,10 @@ const runCodeCoverage = async (coverage) => {
 
 async function main() {
   try {
+    core.info("Starting code coverage action");
     const compareFile = getLcovFile();
-
     core.info(`lcov-file: ${compareFile}`);
-
+    core.info("Parsing lcov file");
     const coverage = await parseLcovFile(compareFile);
     core.info(`Current code coverage: ${coverage.percentage}%`);
 
