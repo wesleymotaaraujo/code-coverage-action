@@ -14427,7 +14427,8 @@ const getBarecheckApiKey = () =>
   valueOrFalse(core.getInput("barecheck-api-key"));
 
 const getLcovFile = () => {
-  core.info(core.getInput("lcov-file"));
+  core.info("Getting lcov file");
+  core.info("lcov file: ",core.getInput("lcov-file"));
   return core.getInput("lcov-file");
 
 } 
@@ -15014,10 +15015,10 @@ const runCodeCoverage = async (coverage) => {
 
 async function main() {
   try {
+    core.info("Starting code coverage action");
     const compareFile = getLcovFile();
-
     core.info(`lcov-file: ${compareFile}`);
-
+    core.info("Parsing lcov file");
     const coverage = await parseLcovFile(compareFile);
     core.info(`Current code coverage: ${coverage.percentage}%`);
 
