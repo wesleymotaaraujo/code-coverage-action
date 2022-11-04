@@ -14426,7 +14426,11 @@ const getBarecheckGithubAppToken = () =>
 const getBarecheckApiKey = () =>
   valueOrFalse(core.getInput("barecheck-api-key"));
 
-const getLcovFile = () => core.getInput("lcov-file");
+const getLcovFile = () => {
+  core.info(core.getInput("lcov-file"));
+  return core.getInput("lcov-file");
+
+} 
 
 const getBaseLcovFile = () => valueOrFalse(core.getInput("base-lcov-file"));
 
