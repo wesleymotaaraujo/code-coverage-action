@@ -16,14 +16,17 @@ const runCodeCoverage = async (coverage) => {
   const diff = await getBaseCoverageDiff(coverage);
   core.info(`Code coverage diff: ${diff}%`);
 
+  core.info(`await getChangedFiles`);
   const changedFilesCoverage = await getChangedFilesCoverage(coverage);
+  core.info(`sendSummaryComment`);
   await sendSummaryComment(changedFilesCoverage, diff, coverage.percentage);
 
+  core.info(`checkMinimumRatio`);
   await checkMinimumRatio(diff);
+  core.info(`showAnnotations`);
   await showAnnotations(changedFilesCoverage);
-
+  core.info(`getBarecheckApiKey`);
   if (getBarecheckApiKey()) await sendCurrentCoverage(coverage.percentage);
-
   core.setOutput("percentage", coverage.percentage);
   core.setOutput("diff", diff);
 };
@@ -36,10 +39,12 @@ async function main() {
     core.info("Parsing lcov file");
     const coverage = await parseLcovFile(compareFile);
     core.info(`Current code coverage: ${coverage.percentage}%`);
-
+    core.info(`runCodeCoverage`);
     await runCodeCoverage(coverage);
   } catch (err) {
     core.info(err);
+    core.info(err.message);
+    core.info(err.stack)
     core.setFailed(err.message);
   }
 }

@@ -33,7 +33,6 @@ const getBarecheckApiKey = () =>
 
 const getLcovFile = () => {
   core.info("Getting lcov file");
-  core.info("lcov file: ",core.getInput("lcov-file"));
   return core.getInput("lcov-file");
 
 } 
