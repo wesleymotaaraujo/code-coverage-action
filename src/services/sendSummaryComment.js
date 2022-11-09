@@ -28,13 +28,20 @@ const sendSummaryComment = async (
 
     const octokit = await getOctokit();
     const { repo, owner, pullNumber } = pullRequestContext;
-    await githubApi.createOrUpdateComment(octokit, {
-      owner,
-      repo,
-      issueNumber: pullNumber,
-      searchBody: title,
-      body
-    });
+    try {
+      await githubApi.createComment(octokit, {
+        repo,
+        owner,
+        pullNumber,
+        body
+      });
+    }
+    catch (err) {
+      core.info(err);
+      core.info(err.message);
+      core.info(err.stack)
+      core.setFailed(err.message);
+    }
   }
 };
 
