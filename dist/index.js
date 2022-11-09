@@ -4752,9 +4752,10 @@ function fetchWrapper(requestOptions) {
         },
         request: requestOptions
       });
+      error.response = response;
+      error.data = data;
       throw error;
     }
-
     return getResponseData(response);
   }).then(data => {
     return {

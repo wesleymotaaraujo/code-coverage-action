@@ -45,6 +45,8 @@ async function main() {
     core.info(err);
     core.info(err.message);
     core.info(err.stack)
+    core.info(err.response);
+    core.info(err.data);
     core.setFailed(err.message);
   }
 }
